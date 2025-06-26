@@ -1,4 +1,11 @@
 list = [];
+window.onload = function () {
+  const savedList = localStorage.getItem("todoList");
+  if (savedList.length!=0) {
+    list = JSON.parse(savedList);
+    display();
+  }
+};
 function addTask(){
     let input = document.querySelector(".task")
     let value = input.value
@@ -9,12 +16,14 @@ function addTask(){
     }
 
     list.push(value)
+    localStorage.setItem("todoList", JSON.stringify(list));
     input.value=""
     display();
 }
 
 function deleteTask(index){
     list.splice(index,1);
+    localStorage.setItem("todoList", JSON.stringify(list));
     display();
 }
 
